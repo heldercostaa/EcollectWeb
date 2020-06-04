@@ -17,7 +17,7 @@ const Home: React.FC = () => {
           <h1>Your marketplace to collect waste.</h1>
           <p>Our goal is to help people find collect points in an efficient way.</p>
         
-          <a href="/register">
+          <a href="/create-point">
             <span>
               <FiLogIn />
             </span>
