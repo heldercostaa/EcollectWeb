@@ -18,6 +18,13 @@
 
 #page-home .content header {
   margin: 48px 0 0;
+
+  display: flex;
+  align-items: center;
+}
+
+#page-home .content header h1 {
+  margin: 0 0 0 15px;
 }
 
 #page-home .content main {

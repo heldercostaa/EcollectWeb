@@ -10,6 +10,7 @@ const Home: React.FC = () => {
       <div className="content">
         <header>
           <img src={logo} alt="E-collect" />
+          <h1>E-collect</h1>
         </header>
 
         <main>
@@ -20,7 +21,7 @@ const Home: React.FC = () => {
             <span>
               <FiLogIn />
             </span>
-            <strong>Register a new collect point</strong>
+            <strong>Register a collect point</strong>
           </a>
         </main>
       </div>
