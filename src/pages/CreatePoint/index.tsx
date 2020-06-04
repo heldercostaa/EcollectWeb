@@ -1,5 +1,5 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
@@ -41,6 +41,8 @@ const CreatePoint: React.FC = () => {
   const [selectedCity, setSelectedCity] = useState('0');
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0, 0]);
+
+  const history = useHistory();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(pos => {
@@ -109,13 +111,13 @@ const CreatePoint: React.FC = () => {
       setSelectedItems([...selectedItems, id]);
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     
     const { name, email, whatsapp } = formData;
     const uf = selectedUf;
     const city = selectedCity;
-    const [lat, lon] = selectedPosition;
+    const [latitude, longitude] = selectedPosition;
     const items = selectedItems;
 
     const data = {
@@ -124,12 +126,14 @@ const CreatePoint: React.FC = () => {
       whatsapp,
       uf,
       city,
-      lat,
-      lon,
+      latitude,
+      longitude,
       items
     };
 
-    console.log(data);
+    await api.post('points', data);
+
+    history.push('/');
   }
 
   return (
