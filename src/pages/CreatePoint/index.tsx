@@ -5,6 +5,8 @@ import { Map, TileLayer, Marker } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
 import axios from 'axios';
 
+import Dropzone from '../../components/Dropzone';
+
 import api from '../../services/api';
 
 import logo from '../../assets/logo.svg';
@@ -17,7 +19,7 @@ interface Item {
 }
 
 interface IBGEUFResponse {
-  sigla: string;
+  initials: string;
 }
 
 interface IBGECityResponse {
@@ -60,7 +62,7 @@ const CreatePoint: React.FC = () => {
 
   useEffect(() => {
     axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then (res => {
-      const ufInitials = res.data.map(uf => uf.sigla);
+      const ufInitials = res.data.map(uf => uf.initials);
       setUfs(ufInitials);
     });
   }, []);
@@ -152,6 +154,8 @@ const CreatePoint: React.FC = () => {
 
       <form onSubmit={handleSubmit}>
         <h1>Register new <br /> collection point</h1>
+
+        <Dropzone />
 
         <fieldset>
           <legend>
